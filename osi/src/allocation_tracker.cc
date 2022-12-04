@@ -169,9 +169,6 @@ void* allocation_tracker_notify_alloc(uint8_t allocator_id, void* ptr,
       allocation_debug.allocations_track[allocation_debug.allocations_track_index].allocation_event = ALLOCATION_TRACK_EVENT_ALLOC;
       allocation_debug.allocations_track[allocation_debug.allocations_track_index].size = requested_size;
       allocation_debug.allocations_track[allocation_debug.allocations_track_index].callers[0] = __builtin_return_address(0);
-#if (ALLOCATION_TRACK_NUM_CALLERS>1)
-      allocation_debug.allocations_track[allocation_debug.allocations_track_index].callers[1] = __builtin_return_address(1);
-#endif
       {
         struct timeval tv;
         struct timezone tz;
@@ -219,9 +216,6 @@ void* allocation_tracker_notify_free(UNUSED_ATTR uint8_t allocator_id,
   allocation_debug.allocations_track[allocation_debug.allocations_track_index].allocation_event = ALLOCATION_TRACK_EVENT_FREE;
   allocation_debug.allocations_track[allocation_debug.allocations_track_index].size = 0;
   allocation_debug.allocations_track[allocation_debug.allocations_track_index].callers[0] = __builtin_return_address(0);
-#if (ALLOCATION_TRACK_NUM_CALLERS>1)
-  allocation_debug.allocations_track[allocation_debug.allocations_track_index].callers[1] = __builtin_return_address(1);
-#endif
   {
     struct timeval tv;
     struct timezone tz;
